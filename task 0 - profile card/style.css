@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #23252c;
+  font-family: Inter, sans-serif;
+}
+
+.container {
+  width: 317px;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #1a1b21;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.profile_pic {
+  width: 317px;
+  height: 317px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.profile_pic img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.name_job {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.name_job h1 {
+  color: #ffffff;
+}
+
+.name_job p {
+  color: #f3bf99;
+  font-size: 20px;
+}
+
+.profile_socials {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.profile_socials button {
+  width: 115px;
+  height: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_socials button span {
+  margin-left: 5px;
+}
+
+.profile_socials button.github img {
+  width: 15px;
+  height: 15px;
+}
+
+.profile_socials button a {
+  text-decoration: none;
+}
+
+.profile_socials button.github {
+  background-color: #ffffff;
+}
+
+.profile_socials button.linkedin {
+  background-color: #5093e2;
+}
+
+.bio,
+.location,
+.email,
+.time {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 250px;
+}
+
+.bio h2,
+.location h2,
+.email h2,
+.time h2 {
+  color: #f5f5f5;
+  margin-bottom: 10px;
+}
+
+.bio p {
+  line-height: 1.5;
+}
+
+.bio p,
+.location p,
+.email p,
+.time p {
+  color: #dcdcdc;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.time p {
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 10%;
+    padding-right: 20px;
+  }
+
+  .profile_pic {
+    width: 400px;
+    height: 400px;
+  }
+
+  .profile_pic img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 0px;
+  }
+
+  .name_job {
+    margin-top: 70px;
+  }
+
+  .profile_socials {
+    margin-top: 40px;
+    gap: 40px;
+    margin-bottom: 20px;
+    width: 350px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .bio {
+    margin-top: 0;
+  }
+  .bio p {
+    line-height: 2;
+  }
+
+  .time p {
+    padding-bottom: 0px;
+  }
+}

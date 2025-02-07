@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="info">
+        <div class="profile_pic">
+          <img src="profile_pic.jpg" data-testid="profilePicture" />
+        </div>
+
+        <div class="name_job">
+          <h1 data-testid="fullname">Golden Okeama</h1>
+          <p data-testid="jobTitle">Frontend Developer</p>
+        </div>
+
+        <div class="profile_socials">
+          <button class="github">
+            <a href="https://github.com/goldenokeama" data-testid="socialLinks">
+              <img src="./icons/github_icon.png" alt="linkedIn Icon" />
+              <span>GitHub</span>
+            </a>
+          </button>
+
+          <button class="linkedin">
+            <a
+              href="https://www.linkedin.com/in/golden-okeama-bba0b0253/"
+              data-testid="socialLinks"
+            >
+              <img src="./icons/linkedIn_icon.png" alt="linkedIn Icon" />
+              <span>linkedIn</span>
+            </a>
+          </button>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="bio">
+          <h2>Bio</h2>
+          <p data-testid="shortBio">
+            I am a frontend developer with a particular interest in making
+            things simple and automating daily tasks. I try to keep up with
+            security and best practices, and am always looking for new things to
+            learn.
+          </p>
+        </div>
+
+        <div class="location">
+          <h2>Current Location</h2>
+          <p data-testid="currentLocation">Owerri, Nigeria</p>
+        </div>
+
+        <div class="email">
+          <h2>Email Address</h2>
+          <p data-testid="emailAddress">okeamagolden@gmail.com</p>
+        </div>
+
+        <div class="time">
+          <h2>Current Time</h2>
+          <p id="time" data-testid="currentTimeUTC"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const timeInUTC = new Date().toISOString();
+
+      document.getElementById("time").textContent = timeInUTC;
+    </script>
+  </body>
+</html>
