@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: grey;
+}
+
+.container {
+  width: 350px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+
+  margin-top: 10%;
+
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.guess-color-container h2 {
+  margin-block: 10px;
+}
+
+.guess-color {
+  width: 140px;
+  height: 120px;
+
+  border-radius: 10px;
+  margin-bottom: 15px;
+
+  margin: 0 auto;
+}
+
+.guess-message {
+  width: 190px;
+  font-size: 16px;
+  margin: 0 auto;
+  margin-block: 10px;
+}
+
+.color-button {
+  width: 40px;
+  height: 50px;
+  border-radius: 10px;
+
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.color-button:hover {
+  transform: scale(1.05);
+}
+
+.color-button:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.button-container button {
+  flex: 1 1 calc(33.33% - 10px);
+}
+
+.new-game {
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.new-game:hover {
+  background: linear-gradient(
+    135deg,
+    #ff758c,
+    #ff5e62
+  ); /* Darker gradient on hover */
+  transform: scale(1.05);
+}
+
+.new-game:active {
+  transform: scale(0.98);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 700px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .guess-color-container h2 {
+    margin-block: 20px;
+  }
+
+  .guess-color {
+    width: 200px;
+    height: 180px;
+
+    border-radius: 20px;
+    margin-bottom: 35px;
+
+    margin: 0 auto;
+  }
+
+  .color-button {
+    width: 80px;
+    height: 70px;
+    border-radius: 20px;
+  }
+
+  .button-container {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+}
