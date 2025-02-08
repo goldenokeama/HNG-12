@@ -108,6 +108,7 @@ body {
 @media (min-width: 768px) {
   .container {
     width: 700px;
+    margin-top: 5%;
     padding-top: 20px;
     padding-bottom: 20px;
   }
