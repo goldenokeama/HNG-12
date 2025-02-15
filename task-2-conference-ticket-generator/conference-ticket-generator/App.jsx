@@ -10,16 +10,25 @@ export default function App() {
   const totalSteps = 3;
 
   // putting my formData in the parent App component so I will have a direct access to all the data I need for the ticket UI
-  const [formData, setFormData] = React.useState({
-    ticketType: "",
-    ticketCount: "1",
-    avatarUrl: "",
-    name: "",
-    email: "hello@avioflagos.io",
-    projectDetail: "",
+  const [formData, setFormData] = React.useState(() => {
+    const savedData = localStorage.getItem("formData");
+    return savedData
+      ? JSON.parse(savedData)
+      : {
+          ticketType: "",
+          ticketCount: "1",
+          avatarUrl: "",
+          name: "",
+          email: "hello@avioflagos.io",
+          projectDetail: "",
+        };
   });
 
-  console.log(formData);
+  // Updating formData in localStorage whenever formData changes
+  React.useEffect(() => {
+    localStorage.setItem("formData", JSON.stringify(formData));
+  }, [formData]);
+  // console.log(formData);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -44,6 +53,17 @@ export default function App() {
   }
 
   function bookAnotherTicket() {
+    localStorage.removeItem("formData");
+
+    setFormData({
+      ticketType: "",
+      ticketCount: "1",
+      avatarUrl: "",
+      name: "",
+      email: "hello@avioflagos.io",
+      projectDetail: "",
+    });
+
     setStep(1);
   }
 
@@ -55,7 +75,7 @@ export default function App() {
 
       {step === 1 && (
         <FirstForm
-          nextStep={() => setStep(2)}
+          nextStep={setStep}
           formData={formData}
           handleChange={handleChange}
         />

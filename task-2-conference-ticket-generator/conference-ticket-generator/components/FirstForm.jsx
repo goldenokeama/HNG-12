@@ -1,5 +1,7 @@
 import React from "react";
 export default function FirstForm(props) {
+  const [errors, setErrors] = React.useState({});
+
   const { ticketType } = props.formData;
 
   const ticketElements = [
@@ -72,12 +74,33 @@ export default function FirstForm(props) {
 
   // console.log(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
 
+  const validateAndNext = () => {
+    let newErrors = {};
+
+    if (!props.formData.ticketType) {
+      newErrors.ticketType = "Please select a type of ticket";
+    }
+    if (!props.formData.ticketCount || isNaN(props.formData.ticketCount)) {
+      newErrors.ticketCount = "Please enter a valid number of tickets.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
+      props.nextStep(2);
+    }
+  };
+
   return (
     <>
       <section className="ticket-container">
         <h2>Select Ticket Type:</h2>
 
         <div className="ticket-options">{ticketElements}</div>
+        {errors.ticketType && (
+          <p style={{ color: "red" }}>{errors.ticketType}</p>
+        )}
       </section>
 
       <section className="input-container">
@@ -104,10 +127,13 @@ export default function FirstForm(props) {
             />
           </svg>
         </div>
+        {errors.ticketCount && (
+          <p style={{ color: "red" }}>{errors.ticketCount}</p>
+        )}
       </section>
 
       <section className="next-cancel-container">
-        <button className="next-button" onClick={() => props.nextStep()}>
+        <button className="next-button" onClick={validateAndNext}>
           Next
         </button>
         <button className="cancel-button">Cancel</button>
