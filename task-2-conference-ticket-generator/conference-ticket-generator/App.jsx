@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import FirstForm from "./components/FirstForm";
 import SecondForm from "./components/SecondForm";
+import ConferenceTicket from "./components/ConferenceTicket";
 
 export default function App() {
   const [step, setStep] = React.useState(1);
@@ -59,11 +60,14 @@ export default function App() {
       {step === 2 && (
         <SecondForm
           prevStep={() => setStep(1)}
+          nextStep={() => setStep(3)}
           formData={formData}
           handleChange={handleChange}
           setFormData={setFormData}
         />
       )}
+
+      {step === 3 && <ConferenceTicket />}
     </div>
   );
 }

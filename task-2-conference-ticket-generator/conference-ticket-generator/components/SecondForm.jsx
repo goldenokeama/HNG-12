@@ -112,7 +112,9 @@ export default function secondForm(props) {
       </div>
 
       <section className="next-cancel-container">
-        <button className="next-button">Get My Free Ticket</button>
+        <button className="next-button" onClick={() => props.nextStep()}>
+          Get My Free Ticket
+        </button>
         <button className="cancel-button" onClick={() => props.prevStep()}>
           Back
         </button>

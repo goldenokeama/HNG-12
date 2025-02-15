@@ -59,13 +59,13 @@ input {
   color: #fff;
 }
 
-.header .step-2 {
+.header .steps {
   display: flex;
   align-items: center;
   gap: 12px;
   align-self: stretch;
 }
-.header .step-2 h2 {
+.header .steps h2 {
   color: #fff;
   /* font-family: JejuMyeongjo; */
   font-size: 24px;
@@ -545,4 +545,9 @@ input {
   border-radius: var(--Radius-reg-2, 12px);
   border: 1px solid #07373f;
   background-color: transparent;
+}
+
+.confere-ticket {
+  width: 300px;
+  height: 600px;
 }
