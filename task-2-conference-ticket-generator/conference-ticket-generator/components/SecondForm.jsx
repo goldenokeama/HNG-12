@@ -2,21 +2,24 @@ import React, { useState } from "react";
 import AvatarDropzone from "./AvatarDropzone";
 
 export default function secondForm(props) {
-  const [avatar, setAvatar] = useState(null);
+  const { avatarUrl } = props.formData;
 
-  let imagePath = "";
-
-  if (avatar) {
-    imagePath = URL.createObjectURL(avatar);
-    // send to cloudinary
-  }
+  const handleUpload = (url) => {
+    props.setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        avatarUrl: url,
+      };
+    });
+    console.log("Uploaded image URL:", url);
+  };
 
   return (
     <>
       <div className="profilePhoto">
         <h2>Upload Profile Photo</h2>
 
-        {avatar === null && (
+        {avatarUrl === "" && (
           <div className="avatar-dropzone">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -34,15 +37,15 @@ export default function secondForm(props) {
                 fill="#FAFAFA"
               />
             </svg>
-            <AvatarDropzone onFileUpload={setAvatar} />
+            <AvatarDropzone onUpload={handleUpload} />
           </div>
         )}
 
-        {avatar && (
+        {avatarUrl !== "" && (
           <div
             className="avatar-dropzone-image"
             style={{
-              background: `url(${imagePath}) lightgray 0px 0px / 100% 150% no-repeat`,
+              background: `url(${avatarUrl}) lightgray 0px 0px / 100% 150% no-repeat`,
             }}
           >
             <div className="overlay">
@@ -62,7 +65,7 @@ export default function secondForm(props) {
                   fill="#FAFAFA"
                 />
               </svg>
-              <AvatarDropzone onFileUpload={setAvatar} />
+              <AvatarDropzone onUpload={handleUpload} />
             </div>
           </div>
         )}
@@ -71,7 +74,7 @@ export default function secondForm(props) {
       <div className="progress-bar"></div>
 
       <div className="name-input">
-        <label htmlFor="number-of-tickets">Number of Tickets</label>
+        <label htmlFor="number-of-tickets">Enter your name</label>
         <input
           type="text"
           id="number-of-tickets"
@@ -84,7 +87,7 @@ export default function secondForm(props) {
       </div>
 
       <div className="email-input">
-        <label htmlFor="email">Enter your Email</label>
+        <label htmlFor="email">Enter your email*</label>
         <input
           type="email"
           id="email"

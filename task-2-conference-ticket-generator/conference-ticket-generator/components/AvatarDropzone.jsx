@@ -1,22 +1,46 @@
-import React, { useCallback } from "react";
-
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { Cloudinary } from "@cloudinary/url-gen";
 
-const AvatarDropzone = ({ onFileUpload }) => {
-  const onDrop = useCallback(
-    (acceptedFiles) => {
-      // Pass the uploaded file to the parent component
-      onFileUpload(acceptedFiles[0]);
-    },
-    [onFileUpload]
-  );
+const cloudinaryCore = new Cloudinary({
+  cloud_name: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+});
+
+const AvatarDropzone = ({ onUpload }) => {
+  // const [preview, setPreview] = useState(null);
+
+  const onDrop = useCallback(async (acceptedFiles) => {
+    const file = acceptedFiles[0];
+
+    // Preview the image
+    // const previewUrl = URL.createObjectURL(file);
+    // setPreview(previewUrl);
+
+    // Upload to Cloudinary
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "ticket_avatar_upload");
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${
+        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+      }/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+    onUpload(data.secure_url); // Pass URL to parent component
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: "image/*", // Accept only image files
+    accept: "image/*",
+    multiple: false,
   });
 
-  // border-2 border-dashed p-6 rounded-lg cursor-pointer
   return (
     <div {...getRootProps()} className={isDragActive ? "active" : "not-active"}>
       <input {...getInputProps()} />

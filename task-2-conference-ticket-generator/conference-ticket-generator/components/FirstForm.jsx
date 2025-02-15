@@ -1,7 +1,13 @@
 import React from "react";
 export default function FirstForm(props) {
+  const { ticketType } = props.formData;
+
   const ticketElements = [
-    <label className={`ticket`} htmlFor="free" key="free">
+    <label
+      className={`ticket ${ticketType === "free" ? "selected" : ""}`}
+      htmlFor="free"
+      key="free"
+    >
       <input
         type="radio"
         id="free"
@@ -19,7 +25,11 @@ export default function FirstForm(props) {
       </div>
     </label>,
 
-    <label className={`ticket`} htmlFor="vip" key="vip">
+    <label
+      className={`ticket ${ticketType === "vip" ? "selected" : ""}`}
+      htmlFor="vip"
+      key="vip"
+    >
       <input
         type="radio"
         id="vip"
@@ -29,7 +39,7 @@ export default function FirstForm(props) {
         onChange={props.handleChange}
       />
       <div className="ticket-content">
-        <span className="ticket-label">VIP</span>
+        <span className="ticket-label">$150</span>
         <span>
           <span className="ticket-subtext">VIP Access</span>
           <span className="ticket-availability">20/52</span>
@@ -37,7 +47,11 @@ export default function FirstForm(props) {
       </div>
     </label>,
 
-    <label className={`ticket`} htmlFor="vvip" id="vvip">
+    <label
+      className={`ticket ${ticketType === "vvip" ? "selected" : ""}`}
+      htmlFor="vvip"
+      key="vvip"
+    >
       <input
         type="radio"
         id="vvip"
@@ -55,6 +69,8 @@ export default function FirstForm(props) {
       </div>
     </label>,
   ];
+
+  // console.log(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
 
   return (
     <>

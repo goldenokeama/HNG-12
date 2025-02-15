@@ -11,8 +11,8 @@ export default function App() {
   // putting my formData in the parent App component so I will have a direct access to all the data I need for the ticket UI
   const [formData, setFormData] = React.useState({
     ticketType: "",
-    ticketCount: "",
-    image: "",
+    ticketCount: "1",
+    avatarUrl: "",
     name: "",
     email: "",
     projectDetail: "",
@@ -23,12 +23,23 @@ export default function App() {
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: value,
-      };
-    });
+    if (name === "ticketCount") {
+      if (value === "" || (!isNaN(value) && parseInt(value) > 0)) {
+        setFormData((prevFormData) => {
+          return {
+            ...prevFormData,
+            [name]: value,
+          };
+        });
+      }
+    } else {
+      setFormData((prevFormData) => {
+        return {
+          ...prevFormData,
+          [name]: value,
+        };
+      });
+    }
   }
 
   return (
