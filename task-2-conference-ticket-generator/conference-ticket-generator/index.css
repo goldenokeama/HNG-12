@@ -537,7 +537,7 @@ input {
   width: 100%;
   align-items: flex-start;
   align-self: stretch;
-
+  padding: var(--Radius-reg-2, 12px);
   border-radius: var(--Radius-reg-2, 12px);
   border: 1px solid #07373f;
   background-color: transparent;
