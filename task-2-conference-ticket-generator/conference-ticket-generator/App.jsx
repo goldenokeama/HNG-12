@@ -6,7 +6,10 @@ import SecondForm from "./components/SecondForm";
 import ConferenceTicket from "./components/ConferenceTicket";
 
 export default function App() {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(() => {
+    const savedStep = localStorage.getItem("formStep");
+    return savedStep ? JSON.parse(savedStep) : 1;
+  });
   const totalSteps = 3;
 
   // putting my formData in the parent App component so I will have a direct access to all the data I need for the ticket UI
@@ -54,6 +57,7 @@ export default function App() {
 
   function bookAnotherTicket() {
     localStorage.removeItem("formData");
+    localStorage.removeItem("formStep");
 
     setFormData({
       ticketType: "",

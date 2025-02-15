@@ -40,11 +40,18 @@ const AvatarDropzone = ({ onUpload }) => {
     accept: "image/*",
     multiple: false,
   });
+  const active = {
+    color: "#4caf50",
+  };
 
   return (
-    <div {...getRootProps()} className={isDragActive ? "active" : "not-active"}>
+    <div
+      {...getRootProps()}
+      className={isDragActive ? "drag-zone-active" : "not-active"}
+    >
       <input {...getInputProps()} />
-      <p className="avatar-dropzone-text">
+
+      <p className="avatar-dropzone-text" style={isDragActive ? active : {}}>
         {isDragActive
           ? "Drop the image here..."
           : "Drag & drop or click to upload"}

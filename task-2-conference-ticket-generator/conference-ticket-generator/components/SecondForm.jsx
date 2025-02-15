@@ -2,8 +2,39 @@ import React, { useState } from "react";
 import AvatarDropzone from "./AvatarDropzone";
 
 export default function secondForm(props) {
+  const [errors, setErrors] = React.useState({});
   const { avatarUrl } = props.formData;
 
+  // Email validation function
+  const isValidEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email); // Checks for a valid email format
+  };
+
+  const validateAndNext = () => {
+    let newErrors = {};
+
+    if (!props.formData.name) {
+      newErrors.name = "Please enter your full name";
+    }
+
+    if (!props.formData.email || !isValidEmail(props.formData.email)) {
+      newErrors.email = !props.formData.email
+        ? "Email is required."
+        : "Please enter a valid email address.";
+    }
+
+    if (!props.formData.avatarUrl) {
+      newErrors.avatarUrl =
+        "Please drag and drop an image or click to upload one";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
+      props.nextStep(3);
+    }
+  };
   const handleUpload = (url) => {
     props.setFormData((prevFormData) => {
       return {
@@ -11,7 +42,7 @@ export default function secondForm(props) {
         avatarUrl: url,
       };
     });
-    console.log("Uploaded image URL:", url);
+    // console.log("Uploaded image URL:", url);
   };
 
   return (
@@ -69,6 +100,7 @@ export default function secondForm(props) {
             </div>
           </div>
         )}
+        {errors.avatarUrl && <p style={{ color: "red" }}>{errors.avatarUrl}</p>}
       </div>
 
       <div className="progress-bar"></div>
@@ -84,6 +116,7 @@ export default function secondForm(props) {
           onChange={props.handleChange}
           required
         />
+        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
       </div>
 
       <div className="email-input-container">
@@ -97,6 +130,7 @@ export default function secondForm(props) {
           onChange={props.handleChange}
           required
         />
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </div>
 
       <div className="message-input-container">
@@ -112,7 +146,7 @@ export default function secondForm(props) {
       </div>
 
       <section className="next-cancel-container">
-        <button className="next-button" onClick={() => props.nextStep()}>
+        <button className="next-button" onClick={validateAndNext}>
           Get My Free Ticket
         </button>
         <button className="cancel-button" onClick={() => props.prevStep()}>

@@ -88,6 +88,7 @@ export default function FirstForm(props) {
       setErrors(newErrors);
     } else {
       setErrors({});
+      localStorage.setItem("formStep", JSON.stringify(2));
       props.nextStep(2);
     }
   };
