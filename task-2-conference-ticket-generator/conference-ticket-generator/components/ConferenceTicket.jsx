@@ -1,6 +1,6 @@
 import backgroundImage from "../assets/bg.png";
 import barCodeImage from "../assets/barCode.png";
-export default function ConferenceTicket({ formData }) {
+export default function ConferenceTicket({ formData, bookAnotherTicket }) {
   const bgstyles = {
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: "cover",
@@ -22,7 +22,7 @@ export default function ConferenceTicket({ formData }) {
   };
   return (
     <>
-      <div>
+      <div className="ticket-booked">
         <h2>Your Ticket is Booked!</h2>
         <p>You can download or Check your email for a copy</p>
       </div>
@@ -75,6 +75,13 @@ export default function ConferenceTicket({ formData }) {
 
         <div className="bar-code" style={barCodeStyles}></div>
       </div>
+
+      <section className="next-cancel-container">
+        <button className="next-button">Download Ticket</button>
+        <button className="cancel-button" onClick={bookAnotherTicket}>
+          Book Another Ticket
+        </button>
+      </section>
     </>
   );
 }

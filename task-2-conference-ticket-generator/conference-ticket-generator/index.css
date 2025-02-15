@@ -546,6 +546,19 @@ input {
   background-color: transparent;
 }
 
+.ticket-booked {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.ticket-booked p {
+  text-align: center;
+}
+
 .confere-ticket {
   width: 300px;
   height: 600px;
@@ -630,16 +643,13 @@ input {
 }
 
 .ticket-details .top-grid span {
-  overflow-x: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: inline-block;
   width: 100px;
-  display: flex;
-  padding: 4px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 4px;
-  flex: 1 0 0;
 
+  padding: 4px;
+  flex: 1 0 0;
   border-right: 1px solid #12464e;
 }
 
@@ -652,6 +662,7 @@ input {
   line-height: 150%; /* 15px */
 
   opacity: 0.33;
+  margin-bottom: 4px;
 }
 
 .first-layer,
@@ -706,7 +717,6 @@ input {
 .bar-code {
   width: 236px;
   height: 68px;
-
   position: absolute;
   left: 30px;
   bottom: 22px;

@@ -43,6 +43,10 @@ export default function App() {
     }
   }
 
+  function bookAnotherTicket() {
+    setStep(1);
+  }
+
   return (
     <div className="container">
       <Header step={step} totalSteps={totalSteps} />
@@ -67,7 +71,12 @@ export default function App() {
         />
       )}
 
-      {step === 3 && <ConferenceTicket formData={formData} />}
+      {step === 3 && (
+        <ConferenceTicket
+          formData={formData}
+          bookAnotherTicket={bookAnotherTicket}
+        />
+      )}
     </div>
   );
 }
