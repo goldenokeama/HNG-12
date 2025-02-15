@@ -14,7 +14,7 @@ export default function App() {
     ticketCount: "1",
     avatarUrl: "",
     name: "",
-    email: "",
+    email: "hello@avioflagos.io",
     projectDetail: "",
   });
 

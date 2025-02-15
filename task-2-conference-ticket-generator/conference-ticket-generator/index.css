@@ -12,6 +12,28 @@ body {
   font-family: "Roboto", sans-serif;
   color: #fafafa;
 }
+label {
+  color: var(--color-grey-98, #fafafa);
+
+  /* Text/Regular/Normal */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+
+input {
+  color: var(--color-white-solid, #fff);
+
+  /* Text/Regular/Normal */
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+
+  background-color: transparent;
+}
 
 .container {
   width: 337px;
@@ -461,4 +483,66 @@ body {
     rgba(0, 0, 0, 0.3) 0%,
     rgba(0, 0, 0, 0.3) 100%
   );
+}
+
+.name-input-container {
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+  padding: var(--Radius-reg-2, 12px);
+  gap: var(--Radius-reg, 8px);
+  align-self: stretch;
+}
+.name-input-container input {
+  display: flex;
+  height: 48px;
+  padding: var(--Radius-reg-2, 12px);
+  align-items: center;
+  gap: var(--Radius-reg, 8px);
+  align-self: stretch;
+
+  border-radius: var(--Radius-reg-2, 12px);
+  border: 1px solid #07373f;
+}
+
+.email-input-container {
+  width: 287px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--Radius-reg-2, 12px);
+  /* align-items: center; */
+  gap: var(--Radius-reg, 8px);
+  align-self: stretch;
+
+  line-height: 150%; /* 24px */
+}
+
+.email-input-container input {
+  display: flex;
+  padding: var(--Radius-reg-2, 12px);
+  align-items: center;
+  gap: var(--Radius-reg, 8px);
+  align-self: stretch;
+
+  border-radius: var(--Radius-reg-2, 12px);
+  border: 1px solid #07373f;
+  background-color: transparent;
+}
+
+.message-input-container {
+  /* width: 287px; */
+  display: flex;
+  flex-direction: column;
+  gap: var(--Radius-reg, 8px);
+  padding: var(--Radius-reg-2, 12px);
+}
+
+.message-input-container textarea {
+  height: 127px;
+  align-items: flex-start;
+  align-self: stretch;
+
+  border-radius: var(--Radius-reg-2, 12px);
+  border: 1px solid #07373f;
+  background-color: transparent;
 }

@@ -73,7 +73,7 @@ export default function secondForm(props) {
 
       <div className="progress-bar"></div>
 
-      <div className="name-input">
+      <div className="name-input-container">
         <label htmlFor="number-of-tickets">Enter your name</label>
         <input
           type="text"
@@ -86,20 +86,20 @@ export default function secondForm(props) {
         />
       </div>
 
-      <div className="email-input">
+      <div className="email-input-container">
         <label htmlFor="email">Enter your email*</label>
         <input
           type="email"
           id="email"
           name="email"
-          placeholder="Enter your email"
+          // placeholder="hello@avioflagos.io
           value={props.formData.email}
           onChange={props.handleChange}
           required
         />
       </div>
 
-      <div className="message-input">
+      <div className="message-input-container">
         <label htmlFor="message">About the project</label>
         <textarea
           name="projectDetail"
