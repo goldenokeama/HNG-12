@@ -1,4 +1,5 @@
 import backgroundImage from "../assets/bg.png";
+import barCodeImage from "../assets/barCode.png";
 export default function ConferenceTicket({ formData }) {
   const bgstyles = {
     backgroundImage: `url(${backgroundImage})`,
@@ -12,6 +13,12 @@ export default function ConferenceTicket({ formData }) {
     backgroundPosition: "50%",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
+  };
+
+  const barCodeStyles = {
+    backgroundImage: `url(${barCodeImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   };
   return (
     <>
@@ -31,7 +38,42 @@ export default function ConferenceTicket({ formData }) {
           </div>
 
           <div className="cloudinary-image" style={avatarStyles}></div>
+
+          <div className="ticket-details">
+            <div className="top-grid">
+              <div className="first-layer">
+                <span className="top-left-box">
+                  <h5>Enter your name</h5>
+                  <p>{formData.name}</p>
+                </span>
+                <span className="top-right-box">
+                  <h5>Enter your email *</h5>
+                  <p>{formData.email}</p>
+                </span>
+              </div>
+              <div className="second-layer">
+                <span className="bottom-left-box">
+                  <h5>Ticket Type:</h5>
+                  <p>{formData.ticketType}</p>
+                </span>
+                <span className="bottom-right-box">
+                  <h5>Ticket for :</h5>
+                  <p>{formData.ticketCount}</p>
+                </span>
+              </div>
+            </div>
+
+            <div className="below">
+              <h5>Special request?</h5>
+              <p>
+                Nil ? Or the users sad story they write in there gets this whole
+                space, Max of three rows
+              </p>
+            </div>
+          </div>
         </div>
+
+        <div className="bar-code" style={barCodeStyles}></div>
       </div>
     </>
   );

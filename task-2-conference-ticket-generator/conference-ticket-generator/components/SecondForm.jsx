@@ -87,7 +87,7 @@ export default function secondForm(props) {
       </div>
 
       <div className="email-input-container">
-        <label htmlFor="email">Enter your email*</label>
+        <label htmlFor="email">Enter your email *</label>
         <input
           type="email"
           id="email"
