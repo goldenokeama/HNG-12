@@ -67,7 +67,7 @@ export default function App() {
         />
       )}
 
-      {step === 3 && <ConferenceTicket />}
+      {step === 3 && <ConferenceTicket formData={formData} />}
     </div>
   );
 }
