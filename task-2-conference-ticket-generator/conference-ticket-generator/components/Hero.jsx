@@ -1,7 +1,7 @@
-export default function Hero() {
+export default function Hero(props) {
   return (
     <>
-      <div className="hero">
+      <div className="hero" {...props}>
         <div className="hero-top">
           <h2>Techember Fest "25</h2>
           <p>
@@ -16,7 +16,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="progress-bar"></div>
+      <div className="progress-bar" {...props}></div>
     </>
   );
 }

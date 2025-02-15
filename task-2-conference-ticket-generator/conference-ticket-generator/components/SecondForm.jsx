@@ -100,7 +100,11 @@ export default function secondForm(props) {
             </div>
           </div>
         )}
-        {errors.avatarUrl && <p style={{ color: "red" }}>{errors.avatarUrl}</p>}
+        {errors.avatarUrl && (
+          <p style={{ color: "red" }} role="alert" aria-live="assertive">
+            {errors.avatarUrl}
+          </p>
+        )}
       </div>
 
       <div className="progress-bar"></div>
@@ -116,7 +120,11 @@ export default function secondForm(props) {
           onChange={props.handleChange}
           required
         />
-        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
+        {errors.name && (
+          <p style={{ color: "red" }} role="alert" aria-live="assertive">
+            {errors.name}
+          </p>
+        )}
       </div>
 
       <div className="email-input-container">
@@ -130,7 +138,11 @@ export default function secondForm(props) {
           onChange={props.handleChange}
           required
         />
-        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        {errors.email && (
+          <p style={{ color: "red" }} role="alert" aria-live="assertive">
+            {errors.email}
+          </p>
+        )}
       </div>
 
       <div className="message-input-container">

@@ -88,8 +88,7 @@ export default function FirstForm(props) {
       setErrors(newErrors);
     } else {
       setErrors({});
-      localStorage.setItem("formStep", JSON.stringify(2));
-      props.nextStep(2);
+      props.nextStep();
     }
   };
 
@@ -99,8 +98,11 @@ export default function FirstForm(props) {
         <h2>Select Ticket Type:</h2>
 
         <div className="ticket-options">{ticketElements}</div>
+
         {errors.ticketType && (
-          <p style={{ color: "red" }}>{errors.ticketType}</p>
+          <p style={{ color: "red" }} role="alert" aria-live="assertive">
+            {errors.ticketType}
+          </p>
         )}
       </section>
 
@@ -128,8 +130,11 @@ export default function FirstForm(props) {
             />
           </svg>
         </div>
+
         {errors.ticketCount && (
-          <p style={{ color: "red" }}>{errors.ticketCount}</p>
+          <p style={{ color: "red" }} role="alert" aria-live="assertive">
+            {errors.ticketCount}
+          </p>
         )}
       </section>
 

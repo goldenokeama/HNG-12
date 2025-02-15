@@ -70,6 +70,15 @@ export default function App() {
 
     setStep(1);
   }
+  function nextStep() {
+    localStorage.setItem("formStep", JSON.stringify(2));
+    setStep(2);
+  }
+
+  function prevStep() {
+    localStorage.setItem("formStep", JSON.stringify(1));
+    setStep(1);
+  }
 
   return (
     <div className="container">
@@ -79,7 +88,7 @@ export default function App() {
 
       {step === 1 && (
         <FirstForm
-          nextStep={setStep}
+          nextStep={nextStep}
           formData={formData}
           handleChange={handleChange}
         />
@@ -87,7 +96,7 @@ export default function App() {
 
       {step === 2 && (
         <SecondForm
-          prevStep={() => setStep(1)}
+          prevStep={prevStep}
           nextStep={() => setStep(3)}
           formData={formData}
           handleChange={handleChange}

@@ -7,14 +7,8 @@ const cloudinaryCore = new Cloudinary({
 });
 
 const AvatarDropzone = ({ onUpload }) => {
-  // const [preview, setPreview] = useState(null);
-
   const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles[0];
-
-    // Preview the image
-    // const previewUrl = URL.createObjectURL(file);
-    // setPreview(previewUrl);
 
     // Upload to Cloudinary
     const formData = new FormData();
@@ -32,7 +26,8 @@ const AvatarDropzone = ({ onUpload }) => {
     );
 
     const data = await response.json();
-    onUpload(data.secure_url); // Pass URL to parent component
+    // Pass URL to parent component
+    onUpload(data.secure_url);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
