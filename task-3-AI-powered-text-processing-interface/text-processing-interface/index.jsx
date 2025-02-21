@@ -1,3 +1,7 @@
+import { injectMetaTag } from "./metaInjector.js";
+
+injectMetaTag();
+
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
