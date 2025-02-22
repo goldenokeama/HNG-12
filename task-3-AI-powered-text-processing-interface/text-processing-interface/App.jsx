@@ -16,10 +16,10 @@ export default function App() {
 
   const [summary, setSummary] = React.useState("");
   const [summaryLoad, setSummaryLoad] = React.useState(false);
+  const [isTranslateDisabled, setTranslateDisabled] = React.useState(false);
+  const [isSummaryDisabled, setSummaryDisabled] = React.useState(false);
 
-  React.useEffect(() => {
-    window.scrollTo({ top: -1000, behavior: "smooth" });
-  }, [inputTextTag]);
+  const inputtedTextRef = React.useRef(null);
 
   const selectLang = {
     pt: "Portuguese",
@@ -46,15 +46,19 @@ export default function App() {
     callInitializeLanguageDetector();
     console.log("displaying now...");
     setDisplayedText(inputText);
-    // setInputText("");
+
+    setTimeout(() => {
+      inputtedTextRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   }
 
   function handleTranslate() {
-    if (translatedLangTag && inputText) {
+    if (translatedLangTag && inputTextTag) {
       setTranslatedText("");
       console.log("calling translator...");
       setTranslateLoad(true);
       callInitializeLanguageTranslator();
+      setTranslateDisabled(true);
     }
   }
 
@@ -107,6 +111,8 @@ export default function App() {
       setTranslatedText(translatedText);
 
       setTranslateLoad(false);
+
+      setTranslateDisabled(false);
     }
   }
 
@@ -142,14 +148,21 @@ export default function App() {
     const summary = await summarizer.summarize(longText, {
       context: "This article is intended for a tech-savvy audience.",
     });
+    // console.log("summary: ", summary);
 
-    setSummary(summary);
+    const formattedText = summary.replace(/ \*/g, "\n*");
+
+    // console.log("formattedSummary: ", formattedText);
+
+    setSummary(formattedText);
     setSummaryLoad(false);
+    setSummaryDisabled(false);
   }
 
   function handleSummarize() {
     console.log("calling summarize...");
     setSummaryLoad(true);
+    setSummaryDisabled(true);
     callSummarizer();
   }
 
@@ -158,25 +171,28 @@ export default function App() {
       <header>
         <h2>AI-Powered Text Processing Interface</h2>
       </header>
+      <div ref={inputtedTextRef}></div>
       <div className="output-field">
-        <h3>Text Input 👇</h3>
+        <h3>Text Inputted</h3>
         <hr />
-        {displayedText && <p>{displayedText}</p>}
+        {displayedText && <p>👉 {displayedText}</p>}
         {/* render the language detected here */}
-        {language && <button>{language}</button>}
+        {language && (
+          <span className="language">{language} language detected</span>
+        )}
       </div>
 
       <br />
 
       <div className="translated-text">
-        <h4>Tanslated Text Goes Here 👇</h4>
+        <h4>Tanslated Text Goes Here</h4>
         <hr />
         {translatedText && (
           <h4>Translated to {selectLang[translatedLangTag]}</h4>
         )}
         {translateLoad && <p>Loading translation...</p>}
         <br />
-        {translatedText && <p>{translatedText}</p>}
+        {translatedText && <p>👉 {translatedText}</p>}
       </div>
       <br />
       <label htmlFor="translated">Choose a language to translate to</label>
@@ -194,18 +210,38 @@ export default function App() {
         <option value="tr">Turkish</option>
         <option value="fr">French</option>
       </select>
-      <button onClick={handleTranslate}>Translate</button>
+      <button
+        disabled={isTranslateDisabled}
+        style={{
+          backgroundColor: isTranslateDisabled && "#ccc",
+          color: isTranslateDisabled && "#666",
+          cursor: isTranslateDisabled && "not-allowed",
+        }}
+        onClick={handleTranslate}
+      >
+        Translate
+      </button>
 
       <br />
       <br />
       <div className="summerizer">
         <h4>Summary Goes Here 👇</h4>
         <hr />
-        {summary && <p>{summary}</p>}
-        {summaryLoad && <p>Loading summary please wait...</p>}
+        {summary && <div>{summary}</div>}
+        {summaryLoad && <p>Generating summary please wait...</p>}
 
         {inputText.length > 150 && language === "English" && (
-          <button onClick={handleSummarize}>Summarize</button>
+          <button
+            onClick={handleSummarize}
+            disabled={isSummaryDisabled}
+            style={{
+              backgroundColor: isSummaryDisabled && "#ccc",
+              color: isSummaryDisabled && "#666",
+              cursor: isSummaryDisabled && "not-allowed",
+            }}
+          >
+            Summarize
+          </button>
         )}
       </div>
 
