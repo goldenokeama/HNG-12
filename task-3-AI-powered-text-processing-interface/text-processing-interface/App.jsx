@@ -150,7 +150,12 @@ export default function App() {
 
   return (
     <div className="container">
+      <header>
+        <h2>AI-Powered Text Processing Interface</h2>
+      </header>
       <div className="output-field">
+        <h3>Text Input 👇</h3>
+        <hr />
         {displayedText && <p>{displayedText}</p>}
         {/* render the language detected here */}
         {language && <button>{language}</button>}
@@ -160,6 +165,7 @@ export default function App() {
 
       <div className="translated-text">
         <h4>Tanslated Text Goes Here 👇</h4>
+        <hr />
         {translatedText && (
           <h4>Translated to {selectLang[translatedLangTag]}</h4>
         )}
@@ -189,6 +195,7 @@ export default function App() {
       <br />
       <div className="summerizer">
         <h4>Summary Goes Here 👇</h4>
+        <hr />
         {summary && <p>{summary}</p>}
         {summaryLoad && <p>Loading summary please wait...</p>}
 

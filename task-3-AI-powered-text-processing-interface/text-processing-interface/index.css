@@ -13,3 +13,29 @@ body {
   color: #fafafa;
   padding: 64px 20px;
 }
+
+.container {
+  width: 337px;
+
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+
+  border-radius: 32px;
+  border: 1px solid #0e464f;
+  background: #08252b;
+}
+
+header h2 {
+  color: var(--color-grey-98, #fafafa);
+  text-align: center;
+  font-family: "Road Rage", serif;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+}
