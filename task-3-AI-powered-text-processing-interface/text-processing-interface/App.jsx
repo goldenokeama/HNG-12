@@ -9,11 +9,13 @@ export default function App() {
   const [inputTextTag, setInputTextTag] = React.useState("");
   const [language, setLanguage] = React.useState("");
   const [displayedText, setDisplayedText] = React.useState("");
+
   const [translatedLangTag, setTranslatedLangTag] = React.useState("");
   const [translatedText, setTranslatedText] = React.useState("");
+  const [translateLoad, setTranslateLoad] = React.useState(false);
 
-  const [displayTranslatedText, setDisplayTranslatedLang] =
-    React.useState(false);
+  const [summary, setSummary] = React.useState("");
+  const [summaryLoad, setSummaryLoad] = React.useState(false);
 
   const selectLang = {
     pt: "Portuguese",
@@ -21,6 +23,7 @@ export default function App() {
     ru: "Russian",
     tr: "Turkish",
     fr: "French",
+    en: "English",
   };
 
   function handleChange(event) {
@@ -31,6 +34,7 @@ export default function App() {
     }
     if (name === "translated") {
       setTranslatedLangTag(value);
+      setTranslatedText("");
     }
   }
 
@@ -42,7 +46,9 @@ export default function App() {
 
   function handleTranslate() {
     if (translatedLangTag && inputText) {
+      setTranslatedText("");
       console.log("calling translator...");
+      setTranslateLoad(true);
       callInitializeLanguageTranslator();
     }
   }
@@ -75,9 +81,8 @@ export default function App() {
   }
 
   async function callInitializeLanguageTranslator() {
-    const { translatorAvailable, translatorCapabilities } =
-      await initializeLanguageTranslator();
-    console.log(translatorCapabilities.languagePairAvailable("en", "es"));
+    const { translatorAvailable } = await initializeLanguageTranslator();
+    // console.log(translatorCapabilities.languagePairAvailable("en", "es"));
 
     if (translatorAvailable === "readily") {
       // Creating a translator that translates from one language (sourceLanguage) to another (targetLanguage)
@@ -95,8 +100,52 @@ export default function App() {
       const translatedText = await translator.translate(inputText.trim());
       // console.log(translatedText);
       setTranslatedText(translatedText);
-      setDisplayTranslatedLang(true);
+
+      setTranslateLoad(false);
     }
+  }
+
+  const options = {
+    sharedContext: "This is a scientific article",
+    type: "key-points",
+    format: "markdown",
+    length: "medium",
+  };
+
+  async function callSummarizer() {
+    const available = (await self.ai.summarizer.capabilities()).available;
+    let summarizer;
+    if (available === "no") {
+      // The Summarizer API isn't usable.
+      return;
+    }
+    if (available === "readily") {
+      // The Summarizer API can be used immediately .
+      summarizer = await self.ai.summarizer.create(options);
+    } else {
+      // The Summarizer API can be used after the model is downloaded.
+      summarizer = await self.ai.summarizer.create(options);
+      summarizer.addEventListener("downloadprogress", (e) => {
+        console.log(e.loaded, e.total);
+      });
+      await summarizer.ready;
+    }
+
+    // console.log(summarizer);
+    const longText = inputText.length > 150 ? inputText : "";
+
+    const summary = await summarizer.summarize(longText, {
+      context: "This article is intended for a tech-savvy audience.",
+    });
+
+    setSummary(summary);
+    setSummaryLoad(false);
+  }
+
+  function handleSummarize() {
+    console.log("calling summarize...");
+    setSummaryLoad(true);
+    callSummarizer();
   }
 
   return (
@@ -107,15 +156,18 @@ export default function App() {
         {language && <button>{language}</button>}
       </div>
 
-      <div className="translated-text">
-        <p>
-          Translated to
-          {translatedText ? selectLang[translatedLangTag] : "..."}
-        </p>
-        <hr />
-        {translatedText ? "Loading..." : <p>{translatedText}</p>}
-      </div>
+      <br />
 
+      <div className="translated-text">
+        <h4>Tanslated Text Goes Here 👇</h4>
+        {translatedText && (
+          <h4>Translated to {selectLang[translatedLangTag]}</h4>
+        )}
+        {translateLoad && <p>Loading translation...</p>}
+        <br />
+        {translatedText && <p>{translatedText}</p>}
+      </div>
+      <br />
       <label htmlFor="translated">Choose a language to translate to</label>
       <select
         id="translated"
@@ -132,6 +184,20 @@ export default function App() {
         <option value="fr">French</option>
       </select>
       <button onClick={handleTranslate}>Translate</button>
+
+      <br />
+      <br />
+      <div className="summerizer">
+        <h4>Summary Goes Here 👇</h4>
+        {summary && <p>{summary}</p>}
+        {summaryLoad && <p>Loading summary please wait...</p>}
+
+        {inputText.length > 150 && language === "English" && (
+          <button onClick={handleSummarize}>Summarize</button>
+        )}
+      </div>
+
+      <br />
 
       <div className="input-text-container">
         <label>
