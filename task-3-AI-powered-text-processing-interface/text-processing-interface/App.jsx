@@ -17,6 +17,10 @@ export default function App() {
   const [summary, setSummary] = React.useState("");
   const [summaryLoad, setSummaryLoad] = React.useState(false);
 
+  React.useEffect(() => {
+    window.scrollTo({ top: -1000, behavior: "smooth" });
+  }, [inputTextTag]);
+
   const selectLang = {
     pt: "Portuguese",
     es: "Spanish",
@@ -42,6 +46,7 @@ export default function App() {
     callInitializeLanguageDetector();
     console.log("displaying now...");
     setDisplayedText(inputText);
+    // setInputText("");
   }
 
   function handleTranslate() {
@@ -215,7 +220,9 @@ export default function App() {
             onChange={handleChange}
           />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button onClick={handleSend} className="send-button">
+          Send
+        </button>
       </div>
     </div>
   );

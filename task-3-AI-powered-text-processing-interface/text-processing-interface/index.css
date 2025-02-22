@@ -39,3 +39,19 @@ header h2 {
   font-weight: 400;
   line-height: 48px;
 }
+
+.input-text-container textarea {
+  height: 127px;
+  width: 280px;
+  align-items: flex-start;
+  align-self: stretch;
+  padding: var(--Radius-reg-2, 12px);
+  border-radius: var(--Radius-reg-2, 12px);
+  border: 1px solid #07373f;
+  background-color: transparent;
+  color: #fff;
+}
+
+.input-text-container > .send-button {
+  width: 280px;
+}
