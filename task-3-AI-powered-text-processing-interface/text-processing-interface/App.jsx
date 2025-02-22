@@ -32,9 +32,7 @@ export default function App() {
     if (name === "translated") {
       setTranslatedLangTag(value);
     }
-    // setSent(false);
   }
-  console.log(translatedLangTag);
 
   function handleSend() {
     callInitializeLanguageDetector();
@@ -71,7 +69,7 @@ export default function App() {
       setInputTextTag(detectedLanguage);
       setLanguage(humanReadableLanguage);
     } else {
-      // do something when the model is not available
+      // show something when the model is not available
       console.log(detector);
     }
   }
@@ -80,12 +78,9 @@ export default function App() {
     const { translatorAvailable, translatorCapabilities } =
       await initializeLanguageTranslator();
     console.log(translatorCapabilities.languagePairAvailable("en", "es"));
-    // console.log("yes!!!");
+
     if (translatorAvailable === "readily") {
       // Creating a translator that translates from one language (sourceLanguage) to another (targetLanguage)
-      console.log("inputTag", inputTextTag);
-      console.log("translatedTag", translatedLangTag);
-
       const translator = await self.translation.createTranslator({
         sourceLanguage: inputTextTag.trim(),
         targetLanguage: translatedLangTag.trim(),
@@ -114,14 +109,14 @@ export default function App() {
 
       <div className="translated-text">
         <p>
-          Translated to{" "}
-          {displayTranslatedText ? selectLang[translatedLangTag] : "..."}
+          Translated to
+          {translatedText ? selectLang[translatedLangTag] : "..."}
         </p>
         <hr />
-        <p>{translatedText}</p>
+        {translatedText ? "Loading..." : <p>{translatedText}</p>}
       </div>
 
-      <label htmlFor="translated">What is your favorite color?</label>
+      <label htmlFor="translated">Choose a language to translate to</label>
       <select
         id="translated"
         value={translatedLangTag}
